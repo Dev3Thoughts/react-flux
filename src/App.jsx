@@ -1,34 +1,25 @@
-import React, { useState, useEffect } from "react"
-import { getCourses } from "./api/courseApi"
+import React from "react"
+import { Route, Switch, Redirect } from "react-router-dom"
+import CoursPage from "./components/CoursPage"
+import ManageCoursePage from "./components/ManageCoursePage"
+import Header from "./components/Header"
+import PageNotFound from "./PageNotFound"
+import Home from "./Home"
+import About from "./About"
+
 function App() {
-  const [cart, setCart] = useState([])
-
-  useEffect(() => {
-    getCourses().then((courses) => setCart(courses))
-  }, [])
-
   return (
-    <>
-      <h1>Courses</h1>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Author ID</th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cart.map((i) => (
-            <tr key={i.id}>
-              <td>{i.title}</td>
-              <td>{i.authorId}</td>
-              <td>{i.category}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+    <div className="container-fluid">
+      <Header />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/courses" component={CoursPage} />
+        <Route path="/course" component={ManageCoursePage} />
+        <Route path="/about" component={About} />
+        <Redirect from="/about-page" to="about" />
+        <Route path="*" component={PageNotFound}></Route>
+      </Switch>
+    </div>
   )
 }
 
