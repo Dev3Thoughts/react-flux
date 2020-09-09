@@ -9,17 +9,20 @@ import About from "./About"
 
 function App() {
   return (
-    <div className="container-fluid">
+    <>
       <Header />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/courses" component={CoursPage} />
-        <Route path="/course" component={ManageCoursePage} />
-        <Route path="/about" component={About} />
-        <Redirect from="/about-page" to="about" />
-        <Route path="*" component={PageNotFound}></Route>
-      </Switch>
-    </div>
+      <div className="container-fluid">
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/courses" component={CoursPage} />
+          <Route path="/course/:slug" component={ManageCoursePage} />
+          <Route path="/course" component={ManageCoursePage} />
+          <Route path="/about" component={About} />
+          <Redirect from="/about-page" to="about" />
+          <Route path="*" component={PageNotFound}></Route>
+        </Switch>
+      </div>
+    </>
   )
 }
 

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 function Header() {
   const activeStyle = { color: "red" }
   return (
-    <nav>
+    <nav className="p-2">
       <NavLink activeStyle={activeStyle} exact to="/">
         Home
       </NavLink>
