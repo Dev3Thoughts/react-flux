@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { getCourses } from "../api/courseApi"
 import CoursesList from "./CoursesList"
 
-function CoursPage() {
+function CoursePage() {
   const [cart, setCart] = useState([])
 
   useEffect(() => {
@@ -21,4 +21,4 @@ function CoursPage() {
   )
 }
 
-export default CoursPage
+export default CoursePage

@@ -1,11 +1,41 @@
-import React from "react"
+import React, { useState } from "react"
 import CourseForm from "./CourseForm"
+import * as courseApi from "../api/courseApi"
+import { toast } from "react-toastify"
 function ManageCoursePage(props) {
+  const [course, setCourse] = useState({
+    id: null,
+    slug: "",
+    title: "",
+    authorId: null,
+    category: "",
+  })
+
+  function handleChange({ target }) {
+    // copy of the object
+    const updatedCourse = {
+      ...course,
+      [target.name]: target.value,
+    }
+    setCourse(updatedCourse)
+  }
+
+  function handelSubmit(event) {
+    event.preventDefault()
+    courseApi.saveCourse(course).then(() => {
+      props.history.push("/courses")
+      toast.success("Course saved.")
+    })
+  }
+
   return (
     <>
-      <h1>Manage Course</h1>
-      <CourseForm />
-      {props.match.params.slug}
+      <h3>Manage Course</h3>
+      <CourseForm
+        course={course}
+        onChange={handleChange}
+        onSubmit={handelSubmit}
+      />
     </>
   )
 }
