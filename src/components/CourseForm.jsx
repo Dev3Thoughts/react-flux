@@ -11,6 +11,7 @@ function CourseForm(props) {
         className="form-control"
         onChange={props.onChange}
         value={props.course.title}
+        error={props.errors.title}
       />
 
       <div className="form-group">
@@ -21,6 +22,7 @@ function CourseForm(props) {
             name="authorId"
             className="form-control"
             onChange={props.onChange}
+            error={props.errors.authorId}
             value={props.course.authorId || ""}
           >
             <option value="" />
@@ -28,6 +30,9 @@ function CourseForm(props) {
             <option value="2">Scott Allen</option>
           </select>
         </div>
+        {props.errors.authorId && (
+          <div className="alert alert-danger">{props.errors.authorId}</div>
+        )}
       </div>
 
       <TextInput
@@ -35,6 +40,7 @@ function CourseForm(props) {
         name="category"
         label="Category"
         onChange={props.onChange}
+        error={props.errors.category}
         value={props.course.category}
       />
 

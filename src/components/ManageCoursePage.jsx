@@ -3,6 +3,8 @@ import CourseForm from "./CourseForm"
 import * as courseApi from "../api/courseApi"
 import { toast } from "react-toastify"
 function ManageCoursePage(props) {
+  const [errors, setErrors] = useState({})
+
   const [course, setCourse] = useState({
     id: null,
     slug: "",
@@ -20,8 +22,19 @@ function ManageCoursePage(props) {
     setCourse(updatedCourse)
   }
 
+  function formIsValid() {
+    const _errors = {}
+    if (!course.title) _errors.title = "Title is required"
+    if (!course.category) _errors.category = "Category is required"
+    if (!course.authorId) _errors.authorId = "Author Id is required"
+    setErrors(_errors)
+    // Form is valid if the errors object has no properties
+    return Object.keys(_errors).length === 0
+  }
+
   function handelSubmit(event) {
     event.preventDefault()
+    if (!formIsValid()) return
     courseApi.saveCourse(course).then(() => {
       props.history.push("/courses")
       toast.success("Course saved.")
@@ -32,6 +45,7 @@ function ManageCoursePage(props) {
     <>
       <h3>Manage Course</h3>
       <CourseForm
+        errors={errors}
         course={course}
         onChange={handleChange}
         onSubmit={handelSubmit}
