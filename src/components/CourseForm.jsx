@@ -1,5 +1,6 @@
 import React from "react"
 import TextInput from "./TextInput"
+import PropTypes from "prop-types"
 
 function CourseForm(props) {
   return (
@@ -49,4 +50,10 @@ function CourseForm(props) {
   )
 }
 
+CourseForm.propTypes = {
+  errors: PropTypes.object.isRequired,
+  course: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
+}
 export default CourseForm
