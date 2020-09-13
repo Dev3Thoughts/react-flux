@@ -35,7 +35,10 @@ Dispatcher.register(action => {
             _course.push(action.course)
             store.emitChange()
             break;
-
+        case actionTypes.LOAD_COURSES:
+            _course = action.courses
+            store.emitChange()
+            break;
         default:
         // do nothing
     }

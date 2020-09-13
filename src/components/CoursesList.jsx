@@ -13,7 +13,7 @@ function CoursesList(props) {
           </tr>
         </thead>
         <tbody>
-          {props.cart.map((i) => (
+          {props.courses.map((i) => (
             <tr key={i.id}>
               <td>{i.authorId}</td>
               <td>
