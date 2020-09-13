@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react"
+import courseStore from "../stores/courseStore"
 import { Link } from "react-router-dom"
-import { getCourses } from "../api/courseApi"
 import CoursesList from "./CoursesList"
 
 function CoursePage() {
-  const [cart, setCart] = useState([])
+  const [courses, setCourses] = useState([])
 
   useEffect(() => {
-    getCourses().then((courses) => setCart(courses))
+    setCourses(courseStore.getCourses())
   }, [])
 
   return (
@@ -16,7 +16,7 @@ function CoursePage() {
         {" "}
         Add Course
       </Link>
-      <CoursesList cart={cart} />
+      <CoursesList courses={courses} />
     </>
   )
 }
