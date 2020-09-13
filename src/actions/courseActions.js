@@ -3,11 +3,11 @@ import * as courseApi from "../api/courseApi"
 import actionTypes from "./actionTypes"
 
 export function saveCourse(course) {
-    return courseApi.saveCourse(course).then(saveCourse => {
+    return courseApi.saveCourse(course).then(savedCourse => {
         // Hey dispatcher, go tell all the stores that a course was just created.
         dispatcher.dispatch({
             actionType: actionTypes.CREATE_COURSE,
-            course: saveCourse
+            course: savedCourse
         })
     })
 }
@@ -17,6 +17,15 @@ export function loadCourses() {
         dispatcher.dispatch({
             actionType: actionTypes.LOAD_COURSES,
             courses: courses
+        });
+    });
+}
+
+export function deleteCourse(id) {
+    return courseApi.deleteCourse(id).then(() => {
+        dispatcher.dispatch({
+            actionType: actionTypes.DELETE_COURSE,
+            id: id
         });
     });
 }

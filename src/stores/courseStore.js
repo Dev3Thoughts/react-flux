@@ -1,7 +1,7 @@
 import { EventEmitter } from "events"
 import Dispatcher from "../appDispatcher"
 import actionTypes from "../actions/actionTypes"
-
+import { toast } from "react-toastify"
 const CHANGE_EVENT = "change"
 let _course = []
 
@@ -31,8 +31,21 @@ const store = new CourseStore()
 
 Dispatcher.register(action => {
     switch (action.actionType) {
+        case actionTypes.DELETE_COURSE:
+            _course = _course.filter(
+                course => course.id !== parseInt(action.id, 10),
+                toast.error("Course is deleted.")
+            )
+            store.emitChange()
+            break;
         case actionTypes.CREATE_COURSE:
             _course.push(action.course)
+            store.emitChange()
+            break;
+        case actionTypes.UPDATE_COURSE:
+            _course = _course.map(course =>
+                course.id === action.course.id ? action.course : course
+            )
             store.emitChange()
             break;
         case actionTypes.LOAD_COURSES:

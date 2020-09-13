@@ -7,6 +7,7 @@ function CoursesList(props) {
       <table className="table">
         <thead>
           <tr>
+            <th>&nbsp;</th>
             <th># Author ID</th>
             <th>Title</th>
             <th>Category</th>
@@ -15,6 +16,14 @@ function CoursesList(props) {
         <tbody>
           {props.courses.map((i) => (
             <tr key={i.id}>
+              <td>
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={() => props.deleteCourse(i.id)}
+                >
+                  Delete
+                </button>
+              </td>
               <td>{i.authorId}</td>
               <td>
                 <Link to={"/course/" + i.slug}>{i.title}</Link>
